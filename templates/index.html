@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Network Intrusion Detection System</title>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="static/style.css">
+  <style>
+    
+    .login {
+      max-width: 800px; /* Increased the maximum width */
+      padding: 30px; /* Adjusted padding */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+    .container {
+      max-width: 100%;
+    }
+    .form-group label {
+      font-weight: bold;
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .form-group input, .form-group select {
+      font-size: 0.95rem; /* Slightly increased font size */
+      padding: 8px;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .form-group .smaller-input {
+      font-size: 0.9rem; /* Slightly increased font size */
+    }
+    .btn-primary {
+      font-size: 1rem;
+      padding: 12px;
+    }
+    .text-danger {
+      color: #d9534f;
+    }
+    .sign-out-btn {
+      
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px; /* Adjust padding to make the button smaller */
+    font-size: 0.85rem; /* Reduce font size for smaller button text */
+    z-index: 9999;
+    }
+  </style>
+</head>
+
+
+<body>
+  <form action="{{ url_for('signout') }}" method="get">
+    <button type="submit" class="btn btn-danger sign-out-btn">Sign Out</button>
+  </form>
+  <!-- Centering container using Bootstrap classes -->
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="login card p-4 shadow">
+      <h1 class="text-danger text-primary text-center mb-4 font-weight-bold">Network Intrusion Detection System</h1>
+      
+      <!-- Form for receiving ML queries -->
+      <form action="{{ url_for('predict')}}" method="post">
+        <div class="form-group">
+          <label for="attack">Attack:</label>
+          <select id="attack" name="attack" class="form-control">
+            <option value="0">Other</option>
+            <option value="1">neptune</option>
+            <option value="2">normal</option>
+            <option value="3">satan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="count">Number of connections to the same destination host as the current connection in the past two seconds:</label>
+          <input type="text" name="count" id="count" class="form-control smaller-input" placeholder="count" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="dst_host_diff_srv_rate">The percentage of connections that were to different services, among the connections aggregated in dst_host_count:</label>
+          <input type="text" name="dst_host_diff_srv_rate" id="dst_host_diff_srv_rate" class="form-control smaller-input" placeholder="dst_host_diff_srv_rate" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="dst_host_same_src_port_rate">The percentage of connections that were to the same source port, among the connections aggregated in dst_host_srv_count:</label>
+          <input type="text" name="dst_host_same_src_port_rate" id="dst_host_same_src_port_rate" class="form-control smaller-input" placeholder="dst_host_same_src_port_rate" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="dst_host_same_srv_rate">The percentage of connections that were to the same service, among the connections aggregated in dst_host_count:</label>
+          <input type="text" name="dst_host_same_srv_rate" id="dst_host_same_srv_rate" class="form-control smaller-input" placeholder="dst_host_same_srv_rate" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="dst_host_srv_count">Number of connections having the same port number:</label>
+          <input type="text" name="dst_host_srv_count" id="dst_host_srv_count" class="form-control smaller-input" placeholder="dst_host_srv_count" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="flag">Status of the connection – Normal or Error:</label>
+          <select id="flag" name="flag" class="form-control">
+            <option value="0">Other</option>
+            <option value="1">S0</option>
+            <option value="2">SF</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="last_flag">Last Flag:</label>
+          <input type="text" name="last_flag" id="last_flag" class="form-control smaller-input" placeholder="last_flag" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="logged_in">1 if successfully logged in; 0 otherwise:</label>
+          <input type="text" name="logged_in" id="logged_in" class="form-control smaller-input" placeholder="logged_in" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="same_srv_rate">The percentage of connections that were to the same service, among the connections aggregated in count:</label>
+          <input type="text" name="same_srv_rate" id="same_srv_rate" class="form-control smaller-input" placeholder="same_srv_rate" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="serror_rate">The percentage of connections that have activated the flag (4) s0, s1, s2 or s3, among the connections aggregated in count:</label>
+          <input type="text" name="serror_rate" id="serror_rate" class="form-control smaller-input" placeholder="serror_rate" required="required">
+        </div>
+
+        <div class="form-group">
+          <label for="service_http">Destination network service used http or not:</label>
+          <select id="service_http" name="service_http" class="form-control">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Predict</button>
+      </form>
+      
+      
+      <br>
+      {% if output %}
+      <h3 class="text-center">Attack Class should be <b class="text-danger">{{ output }}</b></h3>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* Custom CSS in static/style.css */
+
+/* Style for text inputs and select elements */
+input[type="text"], select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+/* Style for submit button */
+.btn-primary {
+  background: linear-gradient(to right, #4CAF50, #45a049);
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for submit button */
+.btn-primary:hover {
+  background: linear-gradient(to right, #45a049, #408140);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+/* Active effect for submit button */
+.btn-primary:active {
+  background: linear-gradient(to right, #408140, #3d7d3d);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+}
+
+/* Focus effect for submit button */
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Style for heading */
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: underline;
+  font-weight: bold;
+  text-emphasis-color: grey;
+}
+
+/* Style for smaller inputs */
+.smaller-input {
+  width: 50%;
+}
+
+/* Background image related to network intrusion detection */
+body {
+  background-color: #515050;
+  z-index: -1;
+  opacity:0.8;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/011/432/554/original/programmer-with-jigsaw-shield-system-monitoring-network-traffic-firewall-network-security-system-and-network-firewall-concept-on-white-background-flat-modern-illustration-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
